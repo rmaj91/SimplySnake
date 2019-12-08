@@ -38,12 +38,12 @@
          </padding></TilePane>
       <HBox alignment="CENTER">
          <children>
-            <Label text="Points:">
+            <Label disable="true" text="Points:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="pointsLabel" text="Label">
+            <Label fx:id="pointsLabel" disable="true" text="Label">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
