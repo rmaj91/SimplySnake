@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="220.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+   <children>
+      <VBox>
+         <children>
+            <HBox>
+               <children>
+                  <Label text="board X size:">
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner maxWidth="60.0" fx:id="xSizeSpinner">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Spinner>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label text="board Y size:">
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="ySizeSpinner" maxWidth="60.0">
+                     <HBox.margin>
+                        <Insets left="6.0" />
+                     </HBox.margin>
+                  </Spinner>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label text="Cell Size PX:">
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="cellSizeSpinner" maxWidth="60.0">
+                     <HBox.margin>
+                        <Insets left="9.0" />
+                     </HBox.margin>
+                  </Spinner>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label text="Grid width PX:">
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="gridWidthSpinner" maxWidth="60.0">
+                     <HBox.margin>
+                        <Insets left="6.0" />
+                     </HBox.margin>
+                  </Spinner>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Start">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
