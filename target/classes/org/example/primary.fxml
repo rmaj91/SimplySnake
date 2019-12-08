@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="220.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
+<VBox alignment="CENTER" prefHeight="315.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.PrimaryController">
    <children>
       <Label text="Steering:" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
             <Label text="UP - &quot;W&quot;" />
             <Label text="DOWN - &quot;S&quot;">
@@ -21,7 +21,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox>
          <children>
             <Label text="LEFT - &quot;A&quot;" />
             <Label text="RIGHT - &quot;D&quot;">
@@ -85,6 +85,20 @@
                   <Spinner fx:id="gridWidthSpinner" maxWidth="60.0">
                      <HBox.margin>
                         <Insets left="6.0" />
+                     </HBox.margin>
+                  </Spinner>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label text="Steps/second: ">
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Spinner fx:id="fpsSpinner" maxWidth="60.0">
+                     <HBox.margin>
+                        <Insets left="3.0" />
                      </HBox.margin>
                   </Spinner>
                </children>

@@ -25,14 +25,16 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private Spinner<Integer> gridWidthSpinner;
+    @FXML
+    private Spinner<Double> fpsSpinner;
+
+
 
     @FXML
     private void switchToSecondary() throws IOException {
-        setGraphicEnginesVAriables();
+        setGraphicEnginesVariables();
         App.setRoot("secondary");
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,12 +51,14 @@ public class PrimaryController implements Initializable {
         ySizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 64, 6));
         cellSizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 200, 40));
         gridWidthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2));
+        fpsSpinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1,10,5,0.5));
     }
 
-    private void setGraphicEnginesVAriables() {
+    private void setGraphicEnginesVariables() {
         GraphicTilesEngine.xBoardDimension = xSizeSpinner.getValue();
         GraphicTilesEngine.yBoardDimension = ySizeSpinner.getValue();
         GraphicTilesEngine.cellSize = cellSizeSpinner.getValue();
         GraphicTilesEngine.gridWidth = gridWidthSpinner.getValue();
+        GraphicTilesEngine.fps = fpsSpinner.getValue();
     }
 }

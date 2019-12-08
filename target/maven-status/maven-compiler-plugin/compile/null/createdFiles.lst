@@ -6,3 +6,4 @@ org\example\domain\Snake.class
 org\example\engine\GraphicTilesEngine.class
 org\example\App.class
 org\example\PrimaryController.class
+org\example\domain\SnakeFood.class

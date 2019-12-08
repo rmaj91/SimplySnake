@@ -12,10 +12,19 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import org.example.domain.Direction;
 import org.example.domain.Snake;
+import org.example.domain.SnakeFood;
 import org.example.engine.GraphicTilesEngine;
 
 public class SecondaryController implements Initializable {
 
+
+    //=============================================================================================
+    // Dependencies
+    //=============================================================================================
+    private Snake snake;
+    private Direction direction;
+    private Thread gameThread;
+    private SnakeFood snakeFood;
     private GraphicTilesEngine graphicTilesEngine;
 
     @FXML
@@ -24,10 +33,6 @@ public class SecondaryController implements Initializable {
     private VBox mainPane;
     @FXML
     private Button startButtton;
-
-    private Snake snake;
-    private Direction direction;
-    private Thread  gameThread;
 
 
     public void keyPressed(KeyEvent event) {
@@ -41,23 +46,26 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private void switchToPrimary() throws IOException {
+        App.getStage().setMaxHeight(350);
+        App.getStage().setMaxWidth(200);
+        App.getStage().setMinHeight(350);
         App.getStage().setMinWidth(200);
-        App.getStage().setMinHeight(220);
+        if (gameThread != null)
+            gameThread.interrupt();
         App.setRoot("primary");
     }
 
-    public void startClicked() {
 
+    public void startClicked() {
+        if (gameThread != null)
+            return;
 
         gameThread = new Thread(() -> {
-            direction = null;
-            snake = new Snake();
-            graphicTilesEngine.initView();
-            int step = 1;
+            initDependencies();
 
             long lastTime = System.nanoTime();
             double delta = 0;
-            double fps = 2.5;
+            double fps = GraphicTilesEngine.fps;
             double tickPerSecond = 1000000000 / fps;
 
             while (true) {
@@ -66,14 +74,15 @@ public class SecondaryController implements Initializable {
                 lastTime = now;
                 if (delta >= 1) {
 
-                    snake.changeDirection(direction);
+                    graphicTilesEngine.eraseFood(snakeFood);
                     graphicTilesEngine.eraseSnake(snake);
-                    snake.move();
-                    if(snake.ifSnakeOutOfBoard())
+                    snakeFood.randLocation(snake);
+                    snake.changeDirection(direction);
+                    snake.move(snakeFood);
+                    if (snake.isSnakeOutOfBoard())
                         break;
+                    graphicTilesEngine.displayFood(snakeFood);
                     graphicTilesEngine.displaySnake(snake);
-
-                    System.out.println(step++);
                     delta--;
                 }
             }
@@ -92,6 +101,16 @@ public class SecondaryController implements Initializable {
         graphicTilesEngine = new GraphicTilesEngine(snakeBoardPane, mainPane);
     }
 
+
+    //=============================================================================================
+    // Private Methods
+    //=============================================================================================
+    private void initDependencies() {
+        direction = null;
+        snake = new Snake();
+        graphicTilesEngine.initView();
+        snakeFood = new SnakeFood(snake);
+    }
 
     private Direction getDirection(String code) {
         Direction direction = null;

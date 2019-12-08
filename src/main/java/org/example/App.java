@@ -22,6 +22,7 @@ public class App extends Application {
         App.stage = stage;
         //stage.setMaxWidth(1280);
         //stage.setMaxHeight(720);
+        App.getStage().setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainPane" alignment="CENTER" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" spacing="20.0" style="-fx-background-color: #888888;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SecondaryController">
+<VBox fx:id="mainPane" alignment="BOTTOM_CENTER" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" spacing="20.0" style="-fx-background-color: #888888;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SecondaryController">
     <children>
       <TilePane fx:id="snakeBoardPane" hgap="2.0" prefColumns="4" prefRows="4" style="-fx-background-color: #333333;" vgap="2.0">
          <children>
