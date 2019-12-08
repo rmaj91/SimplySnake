@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -27,12 +27,13 @@ public class SecondaryController implements Initializable {
     private SnakeFood snakeFood;
     private GraphicTilesEngine graphicTilesEngine;
 
+
     @FXML
     private TilePane snakeBoardPane;
     @FXML
     private VBox mainPane;
     @FXML
-    private Button startButtton;
+    private Label pointsLabel;
 
 
     public void keyPressed(KeyEvent event) {
@@ -79,10 +80,11 @@ public class SecondaryController implements Initializable {
                     snakeFood.randLocation(snake);
                     snake.changeDirection(direction);
                     snake.move(snakeFood);
-                    if (snake.isSnakeOutOfBoard())
+                    if (snake.isSnakeOutOfBoard() || snake.isSnakeBiteHimself())
                         break;
                     graphicTilesEngine.displayFood(snakeFood);
                     graphicTilesEngine.displaySnake(snake);
+                    System.out.println("Size: "+snake.getSnakeList().size());
                     delta--;
                 }
             }
@@ -99,6 +101,7 @@ public class SecondaryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         snakeBoardPane.getChildren().clear();
         graphicTilesEngine = new GraphicTilesEngine(snakeBoardPane, mainPane);
+        pointsLabel.setText("000");
     }
 
 
@@ -110,6 +113,7 @@ public class SecondaryController implements Initializable {
         snake = new Snake();
         graphicTilesEngine.initView();
         snakeFood = new SnakeFood(snake);
+        pointsLabel.setText("000");
     }
 
     private Direction getDirection(String code) {

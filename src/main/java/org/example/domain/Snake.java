@@ -97,4 +97,13 @@ public class Snake {
         snakePart.setY(snakePart.getY() + direction.getY());
     }
 
+    public boolean isSnakeBiteHimself() {
+        int xHead = getSnakeList().getLast().getX();
+        int yHead = getSnakeList().getLast().getY();
+        for(int i=0;i<snakeList.size()-1;i++){
+            if(snakeList.get(i).getX() == xHead && snakeList.get(i).getY() == yHead)
+                return true;
+        }
+        return false;
+    }
 }

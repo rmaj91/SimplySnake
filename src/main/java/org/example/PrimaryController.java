@@ -47,11 +47,11 @@ public class PrimaryController implements Initializable {
     // Private Methods
     //=============================================================================================
     private void setSpinnerFactories() {
-        xSizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 64, 6));
-        ySizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 64, 6));
+        xSizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 64, 10));
+        ySizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 64, 10));
         cellSizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 200, 40));
         gridWidthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2));
-        fpsSpinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1,10,5,0.5));
+        fpsSpinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1,20,5,0.5));
     }
 
     private void setGraphicEnginesVariables() {

@@ -3,6 +3,7 @@ package org.example.engine;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -64,6 +65,7 @@ public class GraphicTilesEngine {
             snakeBoardPane.getChildren().get(y*xBoardDimension+x).setStyle(color);
         }
     }
+
 
     public void displayFood(SnakeFood snakeFood) {
             int x = snakeFood.getX();
