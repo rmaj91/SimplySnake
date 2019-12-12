@@ -12,23 +12,16 @@ import org.example.engine.GraphicTilesEngine;
 
 public class PrimaryController implements Initializable {
 
-
-
     @FXML
     private Spinner<Integer> xSizeSpinner;
-
     @FXML
     private Spinner<Integer> ySizeSpinner;
-
     @FXML
     private Spinner<Integer> cellSizeSpinner;
-
     @FXML
     private Spinner<Integer> gridWidthSpinner;
     @FXML
     private Spinner<Double> fpsSpinner;
-
-
 
     @FXML
     private void switchToSecondary() throws IOException {
@@ -42,7 +35,6 @@ public class PrimaryController implements Initializable {
     }
 
 
-
     //=============================================================================================
     // Private Methods
     //=============================================================================================
@@ -50,7 +42,7 @@ public class PrimaryController implements Initializable {
         xSizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 128, 20));
         ySizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(4, 128, 20));
         cellSizeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 200, 40));
-        gridWidthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 2));
+        gridWidthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 40, 2));
         fpsSpinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1,50,5,0.5));
     }
 

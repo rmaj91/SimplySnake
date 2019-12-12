@@ -17,10 +17,9 @@ public class Snake {
     // Constructors
     //=============================================================================================
 
-    /**
-     * Snake tail has index 0.
-     */
+
     public Snake() {
+        // Snake tail has index 0.
         this.snakeList = new LinkedList<>();
         this.snakeList.add(new Element(0, 0));
         this.snakeList.add(new Element(0, 1));
@@ -29,7 +28,7 @@ public class Snake {
 
 
     //=============================================================================================
-    // Assessors
+    // Getters/Setters
     //=============================================================================================
 
 
