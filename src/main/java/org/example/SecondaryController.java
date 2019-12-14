@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import org.example.domain.Direction;
 import org.example.domain.Snake;
 import org.example.domain.SnakeFood;
@@ -26,6 +29,7 @@ public class SecondaryController implements Initializable {
     private Thread gameThread;
     private SnakeFood snakeFood;
     private GraphicTilesEngine graphicTilesEngine;
+    private Timeline timelineDraw;
 
 
     @FXML
@@ -58,41 +62,46 @@ public class SecondaryController implements Initializable {
 
 
     public void startClicked() {
-        if (gameThread != null)
-            return;
+        initDependencies();
+        graphicTilesEngine.initView();
+        timelineDraw.play();
 
-        gameThread = new Thread(() -> {
-            initDependencies();
 
-            long lastTime = System.nanoTime();
-            double delta = 0;
-            double fps = GraphicTilesEngine.fps;
-            double tickPerSecond = 1000000000 / fps;
-
-            while (true) {
-                long now = System.nanoTime();
-                delta += (now - lastTime) / tickPerSecond;
-                lastTime = now;
-                if (delta >= 1) {
-
-                    graphicTilesEngine.eraseFood(snakeFood);
-                    graphicTilesEngine.eraseSnake(snake);
-                    snakeFood.randLocation(snake);
-                    snake.changeDirection(direction);
-                    snake.move(snakeFood);
-                    if (snake.isSnakeOutOfBoard() || snake.isSnakeBiteHimself())
-                        break;
-                    graphicTilesEngine.displayFood(snakeFood);
-                    graphicTilesEngine.displaySnake(snake);
-                    System.out.println("Size: "+snake.getSnakeList().size());
-                    delta--;
-                }
-            }
-            System.out.println("GAME OVER");
-            graphicTilesEngine.fillRed();
-            gameThread = null;
-        });
-        gameThread.start();
+//        if (gameThread != null)
+//            return;
+//
+//        gameThread = new Thread(() -> {
+//            initDependencies();
+//
+//            long lastTime = System.nanoTime();
+//            double delta = 0;
+//            double fps = GraphicTilesEngine.fps;
+//            double tickPerSecond = 1000000000 / fps;
+//
+//            while (true) {
+//                long now = System.nanoTime();
+//                delta += (now - lastTime) / tickPerSecond;
+//                lastTime = now;
+//                if (delta >= 1) {
+//
+//                    graphicTilesEngine.eraseFood(snakeFood);
+//                    graphicTilesEngine.eraseSnake(snake);
+//                    snakeFood.randLocation(snake);
+//                    snake.changeDirection(direction);
+//                    snake.move(snakeFood);
+//                    if (snake.isSnakeOutOfBoard() || snake.isSnakeBiteHimself())
+//                        break;
+//                    graphicTilesEngine.displayFood(snakeFood);
+//                    graphicTilesEngine.displaySnake(snake);
+//                    System.out.println("Size: "+snake.getSnakeList().size());
+//                    delta--;
+//                }
+//            }
+//            System.out.println("GAME OVER");
+//            graphicTilesEngine.fillRed();
+//            gameThread = null;
+//        });
+//        gameThread.start();
 
     }
 
@@ -102,6 +111,21 @@ public class SecondaryController implements Initializable {
         snakeBoardPane.getChildren().clear();
         graphicTilesEngine = new GraphicTilesEngine(snakeBoardPane, mainPane);
         pointsLabel.setText("000");
+        timelineDraw = new Timeline(new KeyFrame(Duration.millis(1000/ GraphicTilesEngine.fps), e->{
+                    graphicTilesEngine.eraseFood(snakeFood);
+                    graphicTilesEngine.eraseSnake(snake);
+                    snakeFood.randLocation(snake);
+                    snake.changeDirection(direction);
+                    snake.move(snakeFood);
+                    graphicTilesEngine.displayFood(snakeFood);
+                    graphicTilesEngine.displaySnake(snake);
+                    if (snake.isSnakeOutOfBoard() || snake.isSnakeBiteHimself()){
+                        timelineDraw.stop();
+                        graphicTilesEngine.fillRed();
+                    }
+
+        }));
+        timelineDraw.setCycleCount(Timeline.INDEFINITE);
     }
 
 
@@ -114,6 +138,7 @@ public class SecondaryController implements Initializable {
         graphicTilesEngine.initView();
         snakeFood = new SnakeFood(snake);
         pointsLabel.setText("000");
+        Snake.setPointsLabel(pointsLabel);
     }
 
     private Direction getDirection(String code) {

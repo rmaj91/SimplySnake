@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import javafx.scene.control.Label;
 import org.example.engine.GraphicTilesEngine;
 
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ public class Snake {
     //=============================================================================================
     private LinkedList<Element> snakeList;
     private Direction direction;
+    private static Label pointsLabel;
 
 
     //=============================================================================================
@@ -31,6 +33,10 @@ public class Snake {
     // Getters/Setters
     //=============================================================================================
 
+
+    public static void setPointsLabel(Label pointsLabel) {
+        Snake.pointsLabel = pointsLabel;
+    }
 
     public LinkedList<Element> getSnakeList() {
         return snakeList;
@@ -70,6 +76,7 @@ public class Snake {
     private void eatFood(SnakeFood snakeFood) {
         snakeList.add(new Element(snakeFood.getX(), snakeFood.getY()));
         snakeFood.setEaten(true);
+        pointsLabel.setText(String.valueOf(10*snakeList.size()-20));
     }
 
     private boolean isFoodEaten(SnakeFood snakeFood) {
